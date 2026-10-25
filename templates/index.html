@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GhostScan - find hidden malware in files and links</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="/static/img/ghost.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/static/style.css?v={{ v('style.css') }}">
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="/"><img src="/static/img/ghost.svg" alt="" width="30" height="32">GhostScan<span class="dot">.</span></a>
+  <nav class="nav-right" aria-label="Main">
+    <div class="dd">
+      <button class="nav-link" id="svcBtn" type="button" aria-expanded="false" aria-controls="svcMenu">Services <span aria-hidden="true">&#9662;</span></button>
+      <ul class="menu" id="svcMenu" hidden>
+        <li><button type="button" data-service="malware"><img src="/static/img/icon-malware.svg" alt="" width="28" height="28">Detect hidden malware</button></li>
+        <li><button type="button" data-service="watermark"><img src="/static/img/icon-watermark.svg" alt="" width="28" height="28">Watermark an image</button></li>
+        <li><button type="button" data-service="secret"><img src="/static/img/icon-secret.svg" alt="" width="28" height="28">Hide a secret message</button></li>
+      </ul>
+    </div>
+    <a class="nav-link" href="#how">How GhostScan works</a>
+    <a class="nav-link pill" href="#team">Contact</a>
+  </nav>
+</header>
+
+<main>
+<section class="hero">
+  <div class="blob" aria-hidden="true"></div>
+  <div class="hero-text">
+    <p class="eyebrow"><span class="pulse" aria-hidden="true"></span>Static analysis. Nothing is ever run.</p>
+    <h1>Find <span class="glow">hidden</span> malware before you open it.</h1>
+    <p class="lead">Check documents, images and links. GhostScan reads files as data and never runs them. It can also watermark your images and hide secret messages.</p>
+    <div class="cta-row">
+      <a class="btn" id="startBtn" href="#services">Choose a service</a>
+      <a class="btn ghost" href="#how">See how it works</a>
+    </div>
+  </div>
+  <div class="hero-art" aria-hidden="true">
+    <img class="mascot" src="/static/img/ghost.svg" alt="" width="360" height="380">
+    <span class="beam"></span>
+    <span class="float f1">macro found</span>
+    <span class="float f2">hidden text</span>
+    <span class="float f3">disguised .exe</span>
+    <span class="float f4">link looks fake</span>
+    <div class="terminal">
+      <b>example output</b>
+      <p class="l1"><i>$</i> scan invoice.pdf.exe</p>
+      <p class="l2"><i class="ok">ok</i> read as data, not executed</p>
+      <p class="l3"><i class="bad">!!</i> double extension, MZ header</p>
+      <p class="l4"><i class="bad">88</i> verdict: Malicious</p>
+    </div>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="mq">
+    <span>Macros</span><span>Hidden scripts</span><span>Disguised files</span><span>Zip bombs</span><span>Hidden Unicode</span><span>LSB steganography</span><span>Invisible watermarks</span><span>Remote templates</span><span>Fake links</span>
+    <span>Macros</span><span>Hidden scripts</span><span>Disguised files</span><span>Zip bombs</span><span>Hidden Unicode</span><span>LSB steganography</span><span>Invisible watermarks</span><span>Remote templates</span><span>Fake links</span>
+  </div>
+</div>
+
+<section class="services" id="services">
+  <h2>Choose a service</h2>
+  <p class="lead">Pick what you want to do. The tools for that service open below.</p>
+  <div class="service-grid" role="group" aria-label="Services">
+    <button type="button" class="service-card" data-service="malware" aria-pressed="false">
+      <img src="/static/img/icon-malware.svg" alt="" width="56" height="56">
+      <b>Detect hidden malware</b>
+      <span>Scan a file or a link for macros, scripts, disguised files and hidden data.</span>
+    </button>
+    <button type="button" class="service-card" data-service="watermark" aria-pressed="false">
+      <img src="/static/img/icon-watermark.svg" alt="" width="56" height="56">
+      <b>Watermark an image</b>
+      <span>Add a visible or invisible watermark, or check an image for one.</span>
+    </button>
+    <button type="button" class="service-card" data-service="secret" aria-pressed="false">
+      <img src="/static/img/icon-secret.svg" alt="" width="56" height="56">
+      <b>Hide a secret message</b>
+      <span>Hide a message in an image or text file, and reveal it again.</span>
+    </button>
+  </div>
+</section>
+
+<!-- Service 1: detect hidden malware -->
+<section class="workspace" id="ws-malware" hidden>
+  <h2>Detect hidden malware</h2>
+  <div class="tabs" role="tablist">
+    <button role="tab" aria-selected="true" data-tab="file">File</button>
+    <button role="tab" aria-selected="false" data-tab="url">Link</button>
+  </div>
+
+  <form id="fileForm" class="panel" data-panel="file">
+    <label class="drop" id="drop" for="fileInput">
+      <input id="fileInput" type="file" accept=".jpg,.jpeg,.png,.pdf,.docx,.docm,.xlsx,.xlsm,.pptx,.doc,.xls,.zip,.txt,.rtf,.php,.phtml,.php5,.js,.html,.htm,.asp,.aspx,.jsp,.py,.sh,.ps1,.vbs,.bat,.cmd">
+      <strong id="dropText">Drop a file here or choose one</strong>
+      <span>JPG, PNG, PDF, DOCX and more. Up to {{ max_mb }} MB.</span>
+    </label>
+    <button class="btn" type="submit">Scan file</button>
+  </form>
+
+  <form id="urlForm" class="panel" data-panel="url" hidden>
+    <input id="urlInput" class="field" type="text" placeholder="https://example.com/download/invoice.pdf" autocomplete="off" aria-label="Link to scan">
+    <button class="btn" type="submit">Scan link</button>
+    <p class="hint">{% if allow_download %}The file behind the link is downloaded in isolation and scanned.{% else %}The link is checked without opening it. Nothing is downloaded.{% endif %}</p>
+  </form>
+
+  <ol class="pipeline" aria-label="Scan steps">
+    <li data-step="1"><b>Receive</b><span>File or link</span></li>
+    <li data-step="2"><b>Validate</b><span>Extension, size, signature</span></li>
+    <li data-step="3"><b>Analyse</b><span>Metadata, signatures, active content</span></li>
+    <li data-step="4"><b>Score</b><span>Rule-based risk</span></li>
+    <li data-step="5"><b>Report</b><span>Evidence and next steps</span></li>
+  </ol>
+</section>
+
+<!-- Service 2: watermark -->
+<section class="workspace tools" id="ws-watermark" hidden>
+  <h2>Watermark an image</h2>
+  <p class="lead">Mark your images with a visible or invisible watermark, or check whether an image carries one. Files are processed in memory and not stored.</p>
+  <div class="tool-grid">
+    <form class="card tool" data-endpoint="/api/watermark/add" data-kind="file">
+      <h3>Add a watermark</h3>
+      <input class="field" type="file" name="file" accept=".png,.jpg,.jpeg" aria-label="Image" required>
+      <input class="field" type="text" name="text" maxlength="16" placeholder="Watermark text (up to 16 characters)" aria-label="Watermark text" required>
+      <div class="row">
+        <select class="field" name="mode" aria-label="Watermark type"><option value="both">Visible + invisible</option><option value="visible">Visible only</option><option value="invisible">Invisible only</option></select>
+        <select class="field" name="position" aria-label="Position"><option value="corner">Corner</option><option value="tiled">Tiled</option></select>
+        <select class="field" name="opacity" aria-label="Opacity"><option value="0.3">Light</option><option value="0.45" selected>Medium</option><option value="0.7">Strong</option></select>
+      </div>
+      <input class="field" type="password" name="key" placeholder="Key for the invisible mark (optional)" autocomplete="off" aria-label="Watermark key">
+      <button class="btn" type="submit">Add watermark</button>
+      <div class="out" aria-live="polite"></div>
+    </form>
+    <form class="card tool" data-endpoint="/api/watermark/detect" data-kind="detect">
+      <h3>Detect a watermark</h3>
+      <p class="hint">Reads GhostScan invisible watermarks and checks for provenance markers.</p>
+      <input class="field" type="file" name="file" accept=".png,.jpg,.jpeg" aria-label="Image to check" required>
+      <input class="field" type="password" name="key" placeholder="Key (if one was used)" autocomplete="off" aria-label="Watermark key">
+      <button class="btn" type="submit">Detect</button>
+      <div class="out" aria-live="polite"></div>
+    </form>
+  </div>
+  <p class="hint">Invisible watermarks survive JPG at about quality 70 and above, but not heavy resizing or cropping. Other companies' watermarks need their own decoders, and GhostScan does not verify Content Credentials signatures.</p>
+</section>
+
+<!-- Service 3: secret message -->
+<section class="workspace tools" id="ws-secret" hidden>
+  <h2>Hide a secret message</h2>
+  <p class="lead">Hide a message inside an image or a text file, and reveal it again. Files are processed in memory and not stored.</p>
+  <div class="tool-grid">
+    <form class="card tool" data-endpoint="/api/stego/hide" data-kind="file">
+      <h3>Hide a message</h3>
+      <p class="hint">PNG or JPG image (saved as PNG), or a .txt file.</p>
+      <input class="field" type="file" name="file" accept=".png,.jpg,.jpeg,.txt" aria-label="Cover file" required>
+      <textarea class="field" name="message" rows="3" maxlength="5000" placeholder="Your secret message" aria-label="Message" required></textarea>
+      <input class="field" type="password" name="passphrase" placeholder="Passphrase (optional, adds encryption)" autocomplete="off" aria-label="Passphrase">
+      <button class="btn" type="submit">Hide message</button>
+      <div class="out" aria-live="polite"></div>
+    </form>
+    <form class="card tool" data-endpoint="/api/stego/reveal" data-kind="reveal">
+      <h3>Reveal a message</h3>
+      <p class="hint">Finds messages made here, and flags statistical signs of other LSB hiding.</p>
+      <input class="field" type="file" name="file" accept=".png,.jpg,.jpeg,.txt" aria-label="File to check" required>
+      <input class="field" type="password" name="passphrase" placeholder="Passphrase (if one was used)" autocomplete="off" aria-label="Passphrase">
+      <button class="btn" type="submit">Reveal</button>
+      <div class="out" aria-live="polite"></div>
+    </form>
+  </div>
+  <p class="hint">Hidden messages are destroyed if the image is resized or saved as JPG. Share the PNG as it is.</p>
+</section>
+
+<section class="result" id="result" hidden aria-live="polite">
+  <div class="verdict" id="verdict">
+    <div class="gauge"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="52" class="track"/><circle id="arc" cx="60" cy="60" r="52" class="arc"/></svg><div><b id="scoreNum">0</b><small>/ 100</small></div></div>
+    <div><h2 id="verdictText"></h2><p id="verdictSub"></p><p class="det-label" id="detLabel" hidden></p></div>
+  </div>
+  <div class="cols">
+    <div class="card"><h3>Analysis checks</h3><div class="scroll" id="checks"></div></div>
+    <div class="card"><h3>Antivirus engines</h3><div id="engines"></div></div>
+  </div>
+  <div class="cols">
+    <div class="card"><h3>Evidence</h3><ul id="evidence" class="evidence"></ul></div>
+    <div class="card"><h3>Next steps</h3><ul id="steps" class="steps"></ul></div>
+  </div>
+  <div id="contents" class="contents"></div>
+  <div class="cols">
+    <div class="card"><h3>Properties</h3><dl id="props"></dl></div>
+    <div class="card"><h3>Metadata</h3><dl id="meta"></dl><h3 class="sub" id="entH">Entropy by section</h3><div id="ent" class="ent"></div></div>
+  </div>
+</section>
+
+<section class="how" id="how">
+  <h2>How GhostScan finds hidden malware in documents</h2>
+  <p class="lead">Five steps, from the moment you add a file to the report you read. The file is only ever read as data. It is never opened, shown or run.</p>
+
+  <article class="how-step">
+    <div class="how-text">
+      <span class="num">1</span>
+      <h3>Receive the file or link</h3>
+      <p>You upload a document or paste a link. GhostScan accepts PDF, Word, Excel and PowerPoint files, older .doc and .xls files, ZIP, RTF, text and images.</p>
+      <ul>
+        <li>The file is held in memory and handled as a block of bytes.</li>
+        <li>Nothing is opened in Word, a PDF viewer or a browser, so nothing can run.</li>
+        <li>A link is scored from its text alone (for example a raw IP address, a look-alike domain, a direct .exe download). It is not visited unless downloading is switched on.</li>
+      </ul>
+    </div>
+    <img class="how-img" src="/static/img/step1-receive.svg" alt="A file or a link goes into GhostScan, which reads it as data and never opens or runs it" width="520" height="300" loading="lazy">
+  </article>
+
+  <article class="how-step flip">
+    <div class="how-text">
+      <span class="num">2</span>
+      <h3>Check it is safe to look at</h3>
+      <p>Before any analysis, GhostScan checks that the file is what it claims to be.</p>
+      <ul>
+        <li><b>Extension and size:</b> only supported types are accepted, with a size limit.</li>
+        <li><b>Real type:</b> the first bytes (the magic bytes) show the true format, such as <code>%PDF-</code> for PDF or <code>PK</code> for Word and Excel files.</li>
+        <li><b>Disguises:</b> a mismatch (an .exe named .pdf), a double extension such as <code>invoice.pdf.exe</code>, or hidden direction characters in the name raise the score.</li>
+        <li><b>Fingerprints:</b> SHA-256, SHA-1 and MD5 hashes are calculated, so the exact file can be compared with known threats.</li>
+        <li><b>Isolation:</b> analysis runs in a separate process with a CPU limit, a memory limit, no permission to write files, and a time-out. A booby-trapped file can only crash that process.</li>
+      </ul>
+    </div>
+    <img class="how-img" src="/static/img/step2-validate.svg" alt="Validation checks on extension, size, real file type and name, then analysis in an isolated process with limits" width="520" height="300" loading="lazy">
+  </article>
+
+  <article class="how-step">
+    <div class="how-text">
+      <span class="num">3</span>
+      <h3>Look inside the document (static analysis)</h3>
+      <p>This is where hidden content is found. Each format is opened as data and examined in its own way.</p>
+      <h4>PDF files</h4>
+      <ul>
+        <li>The raw bytes are searched for risky keywords: <code>/JavaScript</code>, <code>/OpenAction</code>, <code>/Launch</code>, <code>/EmbeddedFile</code>, <code>/RichMedia</code>, <code>/XFA</code>, <code>/SubmitForm</code> and links.</li>
+        <li>Names written with hex codes (like <code>/J#61vaScript</code>) are flagged, because they are used to hide keywords.</li>
+        <li>Compressed streams are safely inflated, then searched for exploit-style script calls such as <code>app.alert</code>, <code>eval</code> and <code>unescape</code>.</li>
+        <li>Data after the final end marker, and the author, creator and dates are recorded.</li>
+      </ul>
+    </div>
+    <img class="how-img" src="/static/img/step3-pdf.svg" alt="Inside a PDF: risky keywords such as JavaScript, OpenAction and Launch, plus compressed streams that are inflated and searched" width="520" height="300" loading="lazy">
+  </article>
+
+  <article class="how-step flip">
+    <div class="how-text">
+      <span class="num sub">3</span>
+      <h3>Word, Excel and PowerPoint</h3>
+      <p>Modern Office files are ZIP archives of small parts. GhostScan looks at the archive and then at each part.</p>
+      <ul>
+        <li><b>The archive:</b> a huge expansion ratio (a zip bomb), paths that escape the folder, password-protected entries, and programs or scripts packed inside.</li>
+        <li><b>Macros:</b> a <code>vbaProject.bin</code> file, auto-run names such as <code>AutoOpen</code>, and calls like <code>Shell</code>, <code>CreateObject</code> or <code>URLDownloadToFile</code>.</li>
+        <li><b>Remote content:</b> external links, a remote template that loads when the file opens, and DDE fields that can run commands without a macro.</li>
+        <li><b>Embedded items:</b> ActiveX controls and embedded objects.</li>
+        <li><b>Hidden text:</b> zero-width and direction-control characters in the document text.</li>
+        <li>Older .doc and .xls files are searched for macro streams in the same way.</li>
+      </ul>
+      <p class="note">For every file type, GhostScan also searches for known attack patterns (PowerShell download commands, embedded Windows programs, command-line tricks), compares the hash with a list of known threats, and measures entropy, which highlights packed or encrypted blocks.</p>
+    </div>
+    <img class="how-img" src="/static/img/step3-office.svg" alt="Inside a Word, Excel or PowerPoint file: document text, macro project, external links, embedded objects and metadata" width="520" height="300" loading="lazy">
+  </article>
+
+  <article class="how-step">
+    <div class="how-text">
+      <span class="num">4</span>
+      <h3>Score the evidence</h3>
+      <p>Every finding has a weight from 0 to 100. A rule such as "contains a macro project" is weighted by how often that signal means trouble.</p>
+      <ul>
+        <li>Weights are combined as <code>risk = 1 - (1 - w1)(1 - w2)...</code>, so several weak signals add up, one strong signal dominates, and the score never passes 100.</li>
+        <li>Dangerous combinations get a small extra boost, such as active content together with a disguised file or an external link.</li>
+        <li>A hash that matches a known threat scores 100.</li>
+        <li><b>Verdicts:</b> under 10 is Clean, 10 to 34 Low risk, 35 to 69 Suspicious, and 70 or more Malicious.</li>
+      </ul>
+    </div>
+    <img class="how-img" src="/static/img/step4-score.svg" alt="Three findings with weights 55, 45 and 50 combine into a risk score of 88, which is Malicious" width="520" height="300" loading="lazy">
+  </article>
+
+  <article class="how-step flip">
+    <div class="how-text">
+      <span class="num">5</span>
+      <h3>Read the report</h3>
+      <p>You get the result in plain language, with the reasons behind it.</p>
+      <ul>
+        <li>The <b>risk score</b> and verdict.</li>
+        <li>The <b>evidence</b>: each finding, its weight, its category and what was found.</li>
+        <li>The <b>file properties</b> and <b>metadata</b>: hashes, real type, size, author, dates and links.</li>
+        <li>An <b>entropy chart</b> showing which sections look packed or encrypted.</li>
+        <li><b>Next steps</b> that match the verdict, such as not opening the file, isolating it, or checking with the sender.</li>
+      </ul>
+    </div>
+    <img class="how-img" src="/static/img/step5-report.svg" alt="A report with the score, evidence list with weights, entropy chart and recommended next steps" width="520" height="300" loading="lazy">
+  </article>
+
+  <div class="how-limits card">
+    <h3>What to keep in mind</h3>
+    <ul>
+      <li>A macro, a link or invisible text is not automatically malicious. Many real documents have them, which is why GhostScan shows evidence and a score instead of a yes or no.</li>
+      <li>Static analysis cannot prove a file is safe. It can miss new or well-hidden threats, so for important files also use an up-to-date antivirus.</li>
+      <li>Encrypted or password-protected content cannot be inspected, and GhostScan flags it instead.</li>
+    </ul>
+    <button class="btn" type="button" data-service="malware">Scan a document now</button>
+  </div>
+</section>
+<section class="team" id="team">
+  <h2>Meet the team</h2>
+  <p class="lead">The people who built GhostScan.</p>
+  <div class="team-grid">
+    <article class="team-card is-lead tone-mint">
+      <div class="team-photo"><img src="/static/img/team/rohan.svg" alt="Sticker portrait of Rohan Shah" width="240" height="240" loading="lazy"></div>
+      <div class="team-info">
+        <h3>Rohan Shah</h3>
+        <p class="team-role">Full Stack &amp; Backend Developer</p>
+      <span class="team-badge">Team lead</span>
+      <a class="team-link" href="https://www.linkedin.com/in/rohan-shah-363922446" target="_blank" rel="noopener noreferrer">LinkedIn profile</a>
+      </div>
+    </article>
+    <article class="team-card tone-violet">
+      <div class="team-photo"><img src="/static/img/team/sourabh.svg" alt="Sticker portrait of Sourabh" width="240" height="240" loading="lazy"></div>
+      <div class="team-info">
+        <h3>Sourabh</h3>
+        <p class="team-role">Frontend Developer</p>
+      </div>
+    </article>
+    <article class="team-card tone-pink">
+      <div class="team-photo"><img src="/static/img/team/himanshu.svg" alt="Sticker portrait of Himanshu" width="240" height="240" loading="lazy"></div>
+      <div class="team-info">
+        <h3>Himanshu</h3>
+        <p class="team-role">Deployment &amp; Testing Developer</p>
+      </div>
+    </article>
+    <article class="team-card tone-peach">
+      <div class="team-photo"><img src="/static/img/team/mohit.svg" alt="Sticker portrait of Mohit" width="240" height="240" loading="lazy"></div>
+      <div class="team-info">
+        <h3>Mohit</h3>
+        <p class="team-role">Frontend Developer</p>
+      </div>
+    </article>
+  </div>
+</section>
+</main>
+
+<script src="/static/app.js?v={{ v('app.js') }}"></script>
+</body>
+</html>

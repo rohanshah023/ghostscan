@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240" role="img" aria-label="Himanshu sticker">
+<defs><filter id="o" x="-15%" y="-15%" width="130%" height="130%">
+<feMorphology in="SourceAlpha" operator="dilate" radius="7" result="d"/>
+<feFlood flood-color="#ffffff"/><feComposite in2="d" operator="in" result="w"/>
+<feMerge result="m"><feMergeNode in="w"/><feMergeNode in="SourceGraphic"/></feMerge>
+<feDropShadow in="m" dx="0" dy="5" stdDeviation="4" flood-color="#000" flood-opacity=".45"/></filter></defs>
+<g filter="url(#o)" stroke-linejoin="round" stroke-linecap="round">
+<path d="M60 205 V108 C60 62 88 34 120 34 C152 34 180 62 180 108 V205 L160 188 L140 207 L120 188 L100 207 L80 188 Z" fill="#ff7ab6"/>
+<path d="M60 170 V108 C60 62 88 34 120 34 C152 34 180 62 180 108 V170 C150 184 90 184 60 170Z" fill="#c43a82" opacity=".0"/>
+<path d="M78 80 C84 58 100 46 116 44" stroke="#fff" stroke-opacity=".55" stroke-width="8" fill="none"/>
+<path d="M60 170 C90 184 150 184 180 170 V205 L160 188 L140 207 L120 188 L100 207 L80 188 L60 205Z" fill="#c43a82" opacity=".35"/>
+<circle cx="86" cy="136" r="7" fill="#ff7ab6" opacity=".55"/><circle cx="154" cy="136" r="7" fill="#ff7ab6" opacity=".55"/>
+<path d="M64 66 C64 24 176 24 176 66 Z" fill="#2b3350"/><rect x="58" y="58" width="124" height="16" rx="8" fill="#3e4a78"/><circle cx="120" cy="22" r="10" fill="#fff"/><circle cx="98" cy="108" r="15" fill="#fff" fill-opacity=".35" stroke="#0b0d14" stroke-width="5"/><circle cx="142" cy="108" r="15" fill="#fff" fill-opacity=".35" stroke="#0b0d14" stroke-width="5"/><path d="M113 108 H127" stroke="#0b0d14" stroke-width="5"/><circle cx="98" cy="108" r="5" fill="#0b0d14"/><circle cx="142" cy="108" r="5" fill="#0b0d14"/><path d="M102 138 Q120 164 138 138 Z" fill="#2a1020" stroke="#0b0d14" stroke-width="4"/><path d="M112 150 Q120 160 128 150 Q120 146 112 150Z" fill="#ff4d6d"/><text x="182" y="58" font-family="monospace" font-weight="700" font-size="26" fill="#5cffc8" stroke="#0b0d14" stroke-width="1">&lt;/&gt;</text>
+</g></svg>

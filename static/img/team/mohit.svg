@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240" role="img" aria-label="Mohit sticker">
+<defs><filter id="o" x="-15%" y="-15%" width="130%" height="130%">
+<feMorphology in="SourceAlpha" operator="dilate" radius="7" result="d"/>
+<feFlood flood-color="#ffffff"/><feComposite in2="d" operator="in" result="w"/>
+<feMerge result="m"><feMergeNode in="w"/><feMergeNode in="SourceGraphic"/></feMerge>
+<feDropShadow in="m" dx="0" dy="5" stdDeviation="4" flood-color="#000" flood-opacity=".45"/></filter></defs>
+<g filter="url(#o)" stroke-linejoin="round" stroke-linecap="round">
+<path d="M60 205 V108 C60 62 88 34 120 34 C152 34 180 62 180 108 V205 L160 188 L140 207 L120 188 L100 207 L80 188 Z" fill="#ffb84d"/>
+<path d="M60 170 V108 C60 62 88 34 120 34 C152 34 180 62 180 108 V170 C150 184 90 184 60 170Z" fill="#d27f10" opacity=".0"/>
+<path d="M78 80 C84 58 100 46 116 44" stroke="#fff" stroke-opacity=".55" stroke-width="8" fill="none"/>
+<path d="M60 170 C90 184 150 184 180 170 V205 L160 188 L140 207 L120 188 L100 207 L80 188 L60 205Z" fill="#d27f10" opacity=".35"/>
+<circle cx="86" cy="136" r="7" fill="#ff7ab6" opacity=".55"/><circle cx="154" cy="136" r="7" fill="#ff7ab6" opacity=".55"/>
+<path d="M66 68 C66 26 174 26 174 68 Z" fill="#1b2030"/><path d="M62 68 H196 Q204 68 200 76 H62Z" fill="#2b3350"/><circle cx="120" cy="30" r="5" fill="#5cffc8"/><circle cx="100" cy="110" r="8" fill="#0b0d14"/><circle cx="103" cy="107" r="3" fill="#fff"/><path d="M130 112 Q140 100 150 112" stroke="#0b0d14" stroke-width="5" fill="none"/><path d="M104 140 Q120 156 136 140" stroke="#0b0d14" stroke-width="5" fill="none"/><circle cx="176" cy="156" r="22" fill="#5cffc8" fill-opacity=".25" stroke="#1b2030" stroke-width="7"/><path d="M192 172 L214 196" stroke="#1b2030" stroke-width="10"/><path d="M166 148 Q170 142 178 142" stroke="#fff" stroke-width="4" fill="none"/>
+</g></svg>

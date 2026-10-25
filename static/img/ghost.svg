@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 380" width="360" height="380" role="img" aria-label="GhostScan ghost mascot holding a magnifying glass">
+<defs>
+<linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5cffc8" stop-opacity=".95"/><stop offset="1" stop-color="#9d7bff" stop-opacity=".9"/></linearGradient>
+<radialGradient id="glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#5cffc8" stop-opacity=".35"/><stop offset="1" stop-color="#5cffc8" stop-opacity="0"/></radialGradient>
+</defs>
+<ellipse cx="180" cy="190" rx="170" ry="170" fill="url(#glow)"/>
+<path d="M70 320 V170 C70 96 118 50 180 50 C242 50 290 96 290 170 V320 L261 294 L232 322 L203 294 L174 322 L145 294 L116 322 L90 296 Z" fill="url(#g)" stroke="#d9fff2" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="146" cy="160" rx="17" ry="24" fill="#07080d"/><ellipse cx="214" cy="160" rx="17" ry="24" fill="#07080d"/>
+<circle cx="151" cy="150" r="6" fill="#fff"/><circle cx="219" cy="150" r="6" fill="#fff"/>
+<ellipse cx="180" cy="214" rx="12" ry="15" fill="#07080d"/>
+<ellipse cx="118" cy="204" rx="14" ry="8" fill="#ff7ab6" opacity=".55"/><ellipse cx="242" cy="204" rx="14" ry="8" fill="#ff7ab6" opacity=".55"/>
+<circle cx="268" cy="262" r="40" fill="#07080d" fill-opacity=".35" stroke="#eef2ff" stroke-width="8"/>
+<line x1="296" y1="292" x2="336" y2="338" stroke="#eef2ff" stroke-width="12" stroke-linecap="round"/>
+<path d="M248 250 A24 24 0 0 1 270 238" stroke="#5cffc8" stroke-width="5" fill="none" stroke-linecap="round"/>
+</svg>

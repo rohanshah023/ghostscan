@@ -1,0 +1,23 @@
+# docker compose up -d --build        (add the ClamAV engine:  docker compose --profile av up -d --build)
+services:
+  web:
+    build: .
+    restart: unless-stopped
+    ports: ["8000:8000"]
+    environment:
+      GHOSTSCAN_TRUST_PROXY: "1"            # set 0 if nothing sits in front of the container
+      GHOSTSCAN_CLAMD_HOST: "clamav"        # ignored when ClamAV is not running
+      # GHOSTSCAN_VT_API_KEY: "..."
+    read_only: true                         # the app writes nothing except temp files
+    tmpfs: ["/tmp:size=512m,mode=1777", "/dev/shm:size=64m"]
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: ["ALL"]
+    mem_limit: 2g
+    pids_limit: 256
+  clamav:
+    image: clamav/clamav:stable
+    profiles: ["av"]
+    restart: unless-stopped
+    volumes: ["clamav-db:/var/lib/clamav"]
+volumes:
+  clamav-db:

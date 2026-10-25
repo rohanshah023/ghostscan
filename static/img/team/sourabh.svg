@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240" role="img" aria-label="Sourabh sticker">
+<defs><filter id="o" x="-15%" y="-15%" width="130%" height="130%">
+<feMorphology in="SourceAlpha" operator="dilate" radius="7" result="d"/>
+<feFlood flood-color="#ffffff"/><feComposite in2="d" operator="in" result="w"/>
+<feMerge result="m"><feMergeNode in="w"/><feMergeNode in="SourceGraphic"/></feMerge>
+<feDropShadow in="m" dx="0" dy="5" stdDeviation="4" flood-color="#000" flood-opacity=".45"/></filter></defs>
+<g filter="url(#o)" stroke-linejoin="round" stroke-linecap="round">
+<path d="M60 205 V108 C60 62 88 34 120 34 C152 34 180 62 180 108 V205 L160 188 L140 207 L120 188 L100 207 L80 188 Z" fill="#9d7bff"/>
+<path d="M60 170 V108 C60 62 88 34 120 34 C152 34 180 62 180 108 V170 C150 184 90 184 60 170Z" fill="#5b3fd0" opacity=".0"/>
+<path d="M78 80 C84 58 100 46 116 44" stroke="#fff" stroke-opacity=".55" stroke-width="8" fill="none"/>
+<path d="M60 170 C90 184 150 184 180 170 V205 L160 188 L140 207 L120 188 L100 207 L80 188 L60 205Z" fill="#5b3fd0" opacity=".35"/>
+<circle cx="86" cy="136" r="7" fill="#ff7ab6" opacity=".55"/><circle cx="154" cy="136" r="7" fill="#ff7ab6" opacity=".55"/>
+<path d="M64 108 C58 30 182 30 176 108" stroke="#1b2030" stroke-width="10" fill="none"/><rect x="52" y="96" width="20" height="40" rx="9" fill="#ff7ab6" stroke="#1b2030" stroke-width="4"/><rect x="168" y="96" width="20" height="40" rx="9" fill="#ff7ab6" stroke="#1b2030" stroke-width="4"/><rect x="78" y="96" width="38" height="26" rx="9" fill="#0b0d14"/><rect x="124" y="96" width="38" height="26" rx="9" fill="#0b0d14"/><path d="M116 106 H124" stroke="#0b0d14" stroke-width="5"/><path d="M85 103 L95 103 M131 103 L141 103" stroke="#fff" stroke-width="3.5" opacity=".7"/><path d="M104 140 Q120 156 136 140" stroke="#0b0d14" stroke-width="5" fill="none"/><path d="M30 70 v-26 l18 -5 v24" stroke="#fff" stroke-width="5" fill="none"/><circle cx="26" cy="72" r="6" fill="#fff"/><circle cx="44" cy="67" r="6" fill="#fff"/>
+</g></svg>
